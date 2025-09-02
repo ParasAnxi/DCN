@@ -7,22 +7,22 @@ string solveXor(const string &a, const string &b) {
   }
   return st;
 }
-string solveDiv(string divi, const string &divs) {
-  int n = divs.size();
-  string st = divi.substr(0, n);
-  while (n < divi.size()) {
+string solveDiv(string dividend, const string &divisor) {
+  int n = divisor.size();
+  string st = dividend.substr(0, n);
+  while (n < dividend.size()) {
     if (st[0] == '1')
-      st = solveXor(divs, st) + divi[n];
+      st = solveXor(divisor, st) + dividend[n];
     else {
-      string zeros(divs.size(), '0');
-      st = solveXor(zeros, st) + divi[n];
+      string zeros(divisor.size(), '0');
+      st = solveXor(zeros, st) + dividend[n];
     }
     n++;
   }
   if (st[0] == '1')
-    st = solveXor(divs, st);
+    st = solveXor(divisor, st);
   else {
-    string zeros(divs.size(), '0');
+    string zeros(divisor.size(), '0');
     st = solveXor(zeros, st);
   }
   return st;
@@ -31,6 +31,7 @@ int main() {
   string dataSt = "100100";
   string polySt = "1101";
   string newSt = dataSt + string(polySt.size() - 1, '0');
+  // cout<<newSt<<endl;
   string remainder = solveDiv(newSt, polySt);
   string transmitted = dataSt + remainder;
   cout<< "Original data "<<dataSt<<endl;
